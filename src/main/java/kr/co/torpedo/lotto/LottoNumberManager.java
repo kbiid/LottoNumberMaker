@@ -17,20 +17,12 @@ public class LottoNumberManager {
 	public void makeLottoNumber() {
 		numberMaker = new RandomNumberMaker(45);
 		numberList.clear();
-		for (int i = 0; i < 6; i++) {
-			numberList.add(numberMaker.getRandomNumber());
-			i = checkOverlap(i);
-		}
-	}
-
-	public int checkOverlap(int i) {
-		for (int j = 0; j < i; j++) {
-			if (numberList.get(i) == numberList.get(j)) {
-				i--;
-				break;
+		while (numberList.size() < 6) {
+			int number = numberMaker.getRandomNumber();
+			if (!numberList.contains(number)) {
+				numberList.add(number);
 			}
 		}
-		return i;
 	}
 
 	public boolean checkOverlap() {
