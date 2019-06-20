@@ -62,9 +62,7 @@ public class FileManager {
 			return false;
 		}
 		if (!dirfile.exists()) { // 폴더가 없는 경우
-			if (dirfile.mkdirs()) {
-				ProgramExector.invalidFileLogger.info("folder make success");
-			} else {
+			if (!dirfile.mkdirs()) {
 				ProgramExector.invalidFileLogger.error("folder make fail");
 				return false;
 			}
@@ -79,9 +77,7 @@ public class FileManager {
 		}
 		if (!resultfile.exists()) { // 파일이 없는 경우
 			try {
-				if (resultfile.createNewFile()) {
-					ProgramExector.invalidFileLogger.info("File make Success ");
-				} else {
+				if (!resultfile.createNewFile()) {
 					ProgramExector.invalidFileLogger.error("FileManager make File NullException!");
 					return false;
 				}

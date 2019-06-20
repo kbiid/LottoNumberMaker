@@ -26,7 +26,7 @@ public class FileIoManager {
 			bWriter.flush();
 		} catch (IOException e) {
 			ProgramExector.invalidFileLogger.error("FileIoManager IOException !!");
-			throw new NullPointerException("FileIoManager IOException !!");
+			throw new NullPointerException("FileIoManager IOException !!" + e);
 		}
 	}
 

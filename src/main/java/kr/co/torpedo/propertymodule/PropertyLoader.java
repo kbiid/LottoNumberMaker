@@ -21,7 +21,7 @@ public class PropertyLoader {
 		try (FileInputStream fis = new FileInputStream(path)) {
 			properties.load(fis);
 		} catch (IOException e) {
-			ProgramExector.invalidFileLogger.error("PropertyLoader IOException!!");
+			ProgramExector.invalidFileLogger.error("PropertyLoader IOException!!" + e);
 			return false;
 		}
 		return true;

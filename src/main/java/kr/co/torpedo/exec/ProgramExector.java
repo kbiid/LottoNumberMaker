@@ -53,6 +53,9 @@ public class ProgramExector {
 					index++;
 					fileManager.setDir(dir + pathManager.getPath() + index + "//");
 					fileManager.makeDirFile();
+					if (!fileManager.checkAndMakeDir()) {
+						break;
+					}
 				} else {
 					break;
 				}
@@ -68,7 +71,7 @@ public class ProgramExector {
 			}
 		}
 	}
-
+	
 	private void setPropertyPath() {
 		loader.loadProp(Path.PROPERTY.getName());
 		reader.setProperties(loader.getProperties());
