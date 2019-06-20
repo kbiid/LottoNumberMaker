@@ -4,9 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import kr.co.torpedo.data.Path;
-import kr.co.torpedo.file.FileIoManager;
-import kr.co.torpedo.file.FileManager;
-import kr.co.torpedo.file.PathManager;
 import kr.co.torpedo.lotto.LottoNumberManager;
 import kr.co.torpedo.manager.FileRelatedManager;
 import kr.co.torpedo.manager.PropertyManager;
