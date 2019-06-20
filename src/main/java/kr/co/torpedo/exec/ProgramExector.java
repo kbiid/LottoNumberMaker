@@ -1,5 +1,8 @@
 package kr.co.torpedo.exec;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import kr.co.torpedo.data.Path;
 import kr.co.torpedo.file.FileIoManager;
 import kr.co.torpedo.file.FileManager;
@@ -9,6 +12,7 @@ import kr.co.torpedo.propertymodule.PropertyLoader;
 import kr.co.torpedo.propertymodule.PropertyReader;
 
 public class ProgramExector {
+	public static final Logger invalidFileLogger = LoggerFactory.getLogger("log.invalid");
 	private LottoNumberManager manager;
 	private FileManager fileManager;
 	private PathManager pathManager;
@@ -39,7 +43,7 @@ public class ProgramExector {
 			}
 			fileManager.setDir(dir + pathManager.getPath() + index + "//");
 			fileManager.makeDirFile();
-			if (!fileManager.checkAndMakeDir()) {
+			if (!fileManager.checkAndMakeDir() || !fileManager.checkAndMakeFile()) {
 				break;
 			}
 			fileManager.makeResultFile();

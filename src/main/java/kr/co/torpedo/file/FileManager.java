@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 
+import kr.co.torpedo.exec.ProgramExector;
+
 public class FileManager {
 	private File dirfile;
 	private File resultfile;
@@ -56,41 +58,40 @@ public class FileManager {
 
 	public boolean checkAndMakeDir() {
 		if (dirfile == null) { // dirfile 변수가 null 일때
-//			Parser.invalidFileLogger.error("dirfile is NullException!");
+			ProgramExector.invalidFileLogger.error("dirfile is NullException!");
 			return false;
 		}
 		if (!dirfile.exists()) { // 폴더가 없는 경우
 			if (dirfile.mkdirs()) {
-//				Parser.invalidFileLogger.info("folder make success");
+				ProgramExector.invalidFileLogger.info("folder make success");
 			} else {
-//				Parser.invalidFileLogger.error("folder make fail");
-				System.out.println("?");
+				ProgramExector.invalidFileLogger.error("folder make fail");
 				return false;
 			}
 		} else {
-//			Parser.invalidFileLogger.info("folder already exist");
+			ProgramExector.invalidFileLogger.info("folder already exist");
 		}
 		return true;
 	}
 
 	public boolean checkAndMakeFile() {
 		if (resultfile == null) { // makefile 변수가 null 일때
-//			Parser.invalidFileLogger.error("makeFile is NullException!");
+			ProgramExector.invalidFileLogger.error("makeFile is NullException!");
 			return false;
 		}
 		if (!resultfile.exists()) { // 파일이 없는 경우
 			try {
 				if (resultfile.createNewFile()) {
-//					Parser.invalidFileLogger.info("File make Success ");
+					ProgramExector.invalidFileLogger.info("File make Success ");
 				} else {
-//					Parser.invalidFileLogger.error("FileManager make File NullException!");
+					ProgramExector.invalidFileLogger.error("FileManager make File NullException!");
 					return false;
 				}
 			} catch (IOException e) {
-//				Parser.invalidFileLogger.error("Serializer Exception : " + e);
+				ProgramExector.invalidFileLogger.error("Serializer Exception : " + e);
 			}
 		} else {
-//			Parser.invalidFileLogger.info("File exist");
+			ProgramExector.invalidFileLogger.info("File exist");
 		}
 		return true;
 	}

@@ -5,6 +5,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import kr.co.torpedo.exec.ProgramExector;
+
 public class FileIoManager {
 	private FileManager fileManager;
 
@@ -14,6 +16,7 @@ public class FileIoManager {
 
 	public void writeTextToFile(String text) {
 		if (!fileManager.checkAndMakeFile()) {
+			ProgramExector.invalidFileLogger.error("file is null");
 			throw new NullPointerException("file is null");
 		}
 		try (FileWriter writer = new FileWriter(fileManager.getResultfile(), true);
@@ -22,7 +25,8 @@ public class FileIoManager {
 			bWriter.newLine();
 			bWriter.flush();
 		} catch (IOException e) {
-			e.printStackTrace();
+			ProgramExector.invalidFileLogger.error("FileIoManager IOException !!");
+			throw new NullPointerException("FileIoManager IOException !!");
 		}
 	}
 

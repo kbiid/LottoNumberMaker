@@ -18,7 +18,6 @@ public class PathManager {
 		int year = cal.get(Calendar.YEAR);
 		int month = cal.get(Calendar.MONTH) + 1;
 		int date = cal.get(Calendar.DATE);
-
 		path = Integer.toString(year) + "/" + Integer.toString(month) + "/" + Integer.toString(date) + "/";
 	}
 }

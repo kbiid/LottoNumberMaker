@@ -4,6 +4,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+import kr.co.torpedo.exec.ProgramExector;
+
 public class PropertyLoader {
 	private Properties properties;
 
@@ -19,6 +21,7 @@ public class PropertyLoader {
 		try (FileInputStream fis = new FileInputStream(path)) {
 			properties.load(fis);
 		} catch (IOException e) {
+			ProgramExector.invalidFileLogger.error("PropertyLoader IOException!!");
 			return false;
 		}
 		return true;
