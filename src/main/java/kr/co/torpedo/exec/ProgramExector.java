@@ -38,15 +38,29 @@ public class ProgramExector {
 		index = 1;
 
 		for (int i = 1; i <= fileNum; i++) {
-			if ((i % folderFileNum) == 0) {
+			if ((i % folderFileNum) == 0 && fileManager.getDirfile().listFiles() != null
+					&& fileManager.getDirfile().listFiles().length >= folderFileNum) {
 				index++;
 			}
 			fileManager.setDir(dir + pathManager.getPath() + index + "//");
 			fileManager.makeDirFile();
-			if (!fileManager.checkAndMakeDir() || !fileManager.checkAndMakeFile()) {
+			if (!fileManager.checkAndMakeDir()) {
 				break;
 			}
+			while (true) {
+				if (fileManager.getDirfile().listFiles() != null
+						&& fileManager.getDirfile().listFiles().length >= folderFileNum) {
+					index++;
+					fileManager.setDir(dir + pathManager.getPath() + index + "//");
+					fileManager.makeDirFile();
+				} else {
+					break;
+				}
+			}
 			fileManager.makeResultFile();
+			if (!fileManager.checkAndMakeFile()) {
+				break;
+			}
 			fileIoManager.setFileManager(fileManager);
 			for (int j = 0; j < lottoset; j++) {
 				manager.makeLottoNumber();
@@ -55,12 +69,12 @@ public class ProgramExector {
 		}
 	}
 
-	public void setPropertyPath() {
+	private void setPropertyPath() {
 		loader.loadProp(Path.PROPERTY.getName());
 		reader.setProperties(loader.getProperties());
 	}
 
-	public void setPropertyInfo() {
+	private void setPropertyInfo() {
 		dir = reader.getDir();
 		fileNum = reader.getFileNum();
 		lottoset = reader.getLottoSet();

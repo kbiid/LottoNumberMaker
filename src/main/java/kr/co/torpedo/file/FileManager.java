@@ -68,8 +68,6 @@ public class FileManager {
 				ProgramExector.invalidFileLogger.error("folder make fail");
 				return false;
 			}
-		} else {
-			ProgramExector.invalidFileLogger.info("folder already exist");
 		}
 		return true;
 	}
@@ -90,8 +88,6 @@ public class FileManager {
 			} catch (IOException e) {
 				ProgramExector.invalidFileLogger.error("Serializer Exception : " + e);
 			}
-		} else {
-			ProgramExector.invalidFileLogger.info("File exist");
 		}
 		return true;
 	}
