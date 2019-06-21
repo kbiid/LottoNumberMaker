@@ -4,6 +4,7 @@ import kr.co.torpedo.exec.ThreadExecutor;
 
 public class Main {
 	public static void main(String[] args) {
+		System.out.println("Program Start");
 		long start, end;
 		start = System.currentTimeMillis();
 		ThreadExecutor tExecutor = new ThreadExecutor();
