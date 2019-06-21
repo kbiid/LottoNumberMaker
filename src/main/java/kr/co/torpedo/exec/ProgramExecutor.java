@@ -8,21 +8,31 @@ import kr.co.torpedo.lotto.LottoNumberManager;
 import kr.co.torpedo.manager.FileRelatedManager;
 import kr.co.torpedo.manager.PropertyManager;
 
-public class ProgramExector {
+public class ProgramExecutor {
 	public static final Logger invalidFileLogger = LoggerFactory.getLogger("log.invalid");
 	private LottoNumberManager manager;
 	private PropertyManager propertyManager;
 	private FileRelatedManager fileRelatedManager;
+	private int fileNum;
 
-	public ProgramExector() {
+	public ProgramExecutor() {
 		manager = new LottoNumberManager();
 		propertyManager = new PropertyManager();
 		fileRelatedManager = new FileRelatedManager();
+		setPropertyPath();
+		setPropertyInfo();
+		fileNum = 0;
+	}
+
+	public void setFileNum(int fileNum) {
+		this.fileNum = fileNum;
+	}
+
+	public PropertyManager getPropertyManager() {
+		return propertyManager;
 	}
 
 	public void writeFile() {
-		setPropertyPath();
-		setPropertyInfo();
 		fileRelatedManager.getPathManager().makePathByDate();
 		int index = 1;
 
@@ -31,7 +41,11 @@ public class ProgramExector {
 		}
 		index = checkIndexBeforeStart(index);
 
-		for (int i = 1; i <= propertyManager.getData().getFileNum(); i++) {
+		if (fileNum == 0) {
+			fileNum = propertyManager.getData().getFileNum();
+		}
+
+		for (int i = 1; i <= fileNum; i++) {
 			if (!checkDir(index)) {
 				break;
 			}
