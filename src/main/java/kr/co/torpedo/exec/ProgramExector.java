@@ -26,45 +26,69 @@ public class ProgramExector {
 		fileRelatedManager.getPathManager().makePathByDate();
 		int index = 1;
 
+		if (!checkDir(index)) {
+			return;
+		}
+		index = checkIndexBeforeStart(index);
+
 		for (int i = 1; i <= propertyManager.getData().getFileNum(); i++) {
-			if ((i % propertyManager.getData().getFolderFileNum()) == 0
-					&& fileRelatedManager.getFileManager().getDirfile().listFiles() != null
-					&& fileRelatedManager.getFileManager().getDirfile().listFiles().length >= propertyManager.getData()
+			if (!checkDir(index)) {
+				break;
+			}
+			if (!checkAndMakeResult()) {
+				break;
+			}
+			index = checkIndexForLoop(index);
+		}
+	}
+
+	public boolean checkDir(int index) {
+		fileRelatedManager.getFileManager().setDir(
+				propertyManager.getData().getDir() + fileRelatedManager.getPathManager().getPath() + index + "//");
+		fileRelatedManager.getFileManager().makeDirFile();
+		return fileRelatedManager.getFileManager().checkAndMakeDir();
+	}
+
+	public boolean checkAndMakeResult() {
+		fileRelatedManager.getFileManager().makeResultFile();
+		if (!fileRelatedManager.getFileManager().checkAndMakeFile()) {
+			return false;
+		}
+		fileRelatedManager.getFileIoManager().setFileManager(fileRelatedManager.getFileManager());
+		for (int j = 0; j < propertyManager.getData().getLottoset(); j++) {
+			manager.makeLottoNumber();
+			fileRelatedManager.getFileIoManager().writeTextToFile(
+					fileRelatedManager.getFileIoManager().ConvertIntListToString(manager.getNumberList()));
+		}
+		return true;
+	}
+
+	public int checkIndexForLoop(int index) {
+		if (fileRelatedManager.getFileManager().getDirfile().listFiles() != null
+				&& fileRelatedManager.getFileManager().getDirfile().listFiles().length == propertyManager.getData()
+						.getFolderFileNum()) {
+			index++;
+		}
+		return index;
+	}
+
+	public int checkIndexBeforeStart(int index) {
+		while (true) {
+			if (fileRelatedManager.getFileManager().getDirfile().listFiles() != null
+					&& fileRelatedManager.getFileManager().getDirfile().listFiles().length == propertyManager.getData()
 							.getFolderFileNum()) {
 				index++;
-			}
-			fileRelatedManager.getFileManager().setDir(
-					propertyManager.getData().getDir() + fileRelatedManager.getPathManager().getPath() + index + "//");
-			fileRelatedManager.getFileManager().makeDirFile();
-			if (!fileRelatedManager.getFileManager().checkAndMakeDir()) {
-				break;
-			}
-			while (true) {
-				if (fileRelatedManager.getFileManager().getDirfile().listFiles() != null
-						&& fileRelatedManager.getFileManager().getDirfile().listFiles().length >= propertyManager
-								.getData().getFolderFileNum()) {
-					index++;
-					fileRelatedManager.getFileManager().setDir(propertyManager.getData().getDir()
-							+ fileRelatedManager.getPathManager().getPath() + index + "//");
-					fileRelatedManager.getFileManager().makeDirFile();
-					if (!fileRelatedManager.getFileManager().checkAndMakeDir()) {
-						break;
-					}
-				} else {
+				fileRelatedManager.getFileManager().setDir(propertyManager.getData().getDir()
+						+ fileRelatedManager.getPathManager().getPath() + index + "//");
+				fileRelatedManager.getFileManager().makeDirFile();
+				if (!fileRelatedManager.getFileManager().checkAndMakeDir()) {
 					break;
 				}
-			}
-			fileRelatedManager.getFileManager().makeResultFile();
-			if (!fileRelatedManager.getFileManager().checkAndMakeFile()) {
+			} else {
 				break;
 			}
-			fileRelatedManager.getFileIoManager().setFileManager(fileRelatedManager.getFileManager());
-			for (int j = 0; j < propertyManager.getData().getLottoset(); j++) {
-				manager.makeLottoNumber();
-				fileRelatedManager.getFileIoManager().writeTextToFile(
-						fileRelatedManager.getFileIoManager().ConvertIntListToString(manager.getNumberList()));
-			}
 		}
+		return index;
 	}
 
 	private void setPropertyPath() {
