@@ -17,8 +17,6 @@ public class ThreadExecutor {
 		rt = new RunnableThread();
 		rt.setExecutor(executor);
 
-		System.out.println(threadNum);
-		
 		for (int i = 1; i <= threadNum; i++) {
 			if (i == threadNum) {
 				executor.setFileNum((propertyFileNum / threadNum) + (propertyFileNum % threadNum));
@@ -33,7 +31,7 @@ public class ThreadExecutor {
 			try {
 				t.join();
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				ProgramExecutor.invalidFileLogger.error("ThreadExecutor Error : " + e);
 			}
 		}
 	}

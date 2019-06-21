@@ -44,7 +44,6 @@ public class ProgramExecutor {
 		if (fileNum == 0) {
 			fileNum = propertyManager.getData().getFileNum();
 		}
-
 		for (int i = 1; i <= fileNum; i++) {
 			if (!checkDir(index)) {
 				break;
