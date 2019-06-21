@@ -61,7 +61,7 @@ public class FileManager {
 			ProgramExecutor.invalidFileLogger.error("dirfile is NullException!");
 			return false;
 		}
-		if (!dirfile.exists()) { // 폴더가 없는 경우
+		if (!(dirfile.exists())) { // 폴더가 없는 경우
 			if (!dirfile.mkdirs()) {
 				ProgramExecutor.invalidFileLogger.error("folder make fail");
 				return false;

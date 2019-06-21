@@ -3,11 +3,10 @@ package kr.co.torpedo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import kr.co.torpedo.config.ConfigReader;
 import kr.co.torpedo.file.FileManager;
 import kr.co.torpedo.file.PathManager;
 import kr.co.torpedo.lotto.LottoNumberManager;
-import kr.co.torpedo.propertymodule.PropertyLoader;
-import kr.co.torpedo.propertymodule.PropertyReader;
 
 class LottoTest {
 
@@ -53,24 +52,19 @@ class LottoTest {
 
 		Assertions.assertEquals(true, fileManager.checkAndMakeFile());
 	}
-	
+
 	@Test
 	void test_PropertyLoader() {
-		PropertyLoader loader = new PropertyLoader();
+		ConfigReader loader = new ConfigReader();
 		String path = "D:/eclipse_workspace/LottoMaker/src/main/resources/application.properties";
-		
 		Assertions.assertEquals(true, loader.loadProp(path));
 	}
-	
+
 	@Test
 	void test_PropertyReader() {
-		PropertyLoader loader = new PropertyLoader();
+		ConfigReader loader = new ConfigReader();
 		String path = "D:/eclipse_workspace/LottoMaker/src/main/resources/application.properties";
 		loader.loadProp(path);
-		PropertyReader reader = new PropertyReader();
-		reader.setProperties(loader.getProperties());
-		
-		Assertions.assertEquals(loader.getProperties(), reader.getProperties());
-		Assertions.assertEquals("D:\\test\\", reader.getDir());
+		Assertions.assertEquals("D:\\test\\", loader.getDir());
 	}
 }

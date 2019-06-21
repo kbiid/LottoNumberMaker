@@ -1,4 +1,4 @@
-package kr.co.torpedo.model;
+package kr.co.torpedo.domain;
 
 public class PropertiesData {
 	private int fileNum, lottoset, folderFileNum, threadNum;

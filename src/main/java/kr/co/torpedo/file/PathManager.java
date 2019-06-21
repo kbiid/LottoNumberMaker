@@ -1,6 +1,7 @@
 package kr.co.torpedo.file;
 
-import java.util.Calendar;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class PathManager {
 	private String path;
@@ -14,10 +15,18 @@ public class PathManager {
 	}
 
 	public void makePathByDate() {
-		Calendar cal = Calendar.getInstance();
-		int year = cal.get(Calendar.YEAR);
-		int month = cal.get(Calendar.MONTH) + 1;
-		int date = cal.get(Calendar.DATE);
-		path = Integer.toString(year) + "/" + Integer.toString(month) + "/" + Integer.toString(date) + "/";
+		path="";
+		
+		SimpleDateFormat format = new SimpleDateFormat("yyyy");
+		String str = format.format(new Date());
+		path += str + "/";
+
+		format = new SimpleDateFormat("MM");
+		str = format.format(new Date());
+		path += str + "/";
+
+		format = new SimpleDateFormat("dd");
+		str = format.format(new Date());
+		path += str + "/";
 	}
 }

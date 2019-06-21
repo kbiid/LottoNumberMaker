@@ -1,38 +1,37 @@
 package kr.co.torpedo.exec;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import kr.co.torpedo.thread.RunnableThread;
 
 public class ThreadExecutor {
 	private ProgramExecutor executor;
 	private RunnableThread rt;
-	private Thread t = null;
+	private ExecutorService exService;
 
 	public ThreadExecutor() {
 		executor = new ProgramExecutor();
 	}
 
 	public void startThread() {
-		int threadNum = executor.getPropertyManager().getData().getThreadNum();
-		int propertyFileNum = executor.getPropertyManager().getData().getFileNum();
+		int threadNum = executor.getConfigReader().getThreadNum();
+		int propertyFileNum = executor.getConfigReader().getFileNum();
+		exService = Executors.newFixedThreadPool(threadNum);
 		rt = new RunnableThread();
-		rt.setExecutor(executor);
+		int fileNum;
 
 		for (int i = 1; i <= threadNum; i++) {
 			if (i == threadNum) {
-				executor.setFileNum((propertyFileNum / threadNum) + (propertyFileNum % threadNum));
-				rt.setExecutor(executor);
+				fileNum = ((propertyFileNum / threadNum) + (propertyFileNum % threadNum));
 			} else {
-				executor.setFileNum((propertyFileNum / threadNum));
-				rt.setExecutor(executor);
+				fileNum = ((propertyFileNum / threadNum));
 			}
-			t = new Thread(rt);
-			t.start();
-
-			try {
-				t.join();
-			} catch (InterruptedException e) {
-				ProgramExecutor.invalidFileLogger.error("ThreadExecutor Error : " + e);
-			}
+			rt = new RunnableThread();
+			rt.setExecutor(executor);
+			rt.setFileNum(fileNum);
+			exService.execute(rt);
 		}
+		exService.shutdown();
 	}
 }

@@ -101,3 +101,74 @@
 [2019-06-21 10:24:36:572][main] INFO  log.invalid - Program End
 [2019-06-21 10:24:47:172][main] INFO  log.invalid - Program Start
 [2019-06-21 10:24:48:562][main] INFO  log.invalid - Program End
+[2019-06-21 13:48:22:187][Thread-3] ERROR log.invalid - folder make fail
+[2019-06-21 13:48:22:187][Thread-2] ERROR log.invalid - folder make fail
+[2019-06-21 13:48:22:187][Thread-0] ERROR log.invalid - folder make fail
+[2019-06-21 13:51:19:203][Thread-0] ERROR log.invalid - folder make fail
+[2019-06-21 13:51:19:203][Thread-1] ERROR log.invalid - folder make fail
+[2019-06-21 13:51:19:203][Thread-3] ERROR log.invalid - folder make fail
+[2019-06-21 13:51:44:172][Thread-3] ERROR log.invalid - folder make fail
+[2019-06-21 13:51:44:172][Thread-0] ERROR log.invalid - folder make fail
+[2019-06-21 13:51:44:172][Thread-2] ERROR log.invalid - folder make fail
+[2019-06-21 13:51:44:172][Thread-1] ERROR log.invalid - folder make fail
+[2019-06-21 13:51:44:172][Thread-1] ERROR log.invalid - folder make fail
+[2019-06-21 13:51:44:172][Thread-0] ERROR log.invalid - folder make fail
+[2019-06-21 13:51:44:172][Thread-2] ERROR log.invalid - folder make fail
+[2019-06-21 13:51:44:172][Thread-3] ERROR log.invalid - folder make fail
+[2019-06-21 13:52:52:188][Thread-0] ERROR log.invalid - folder make fail
+[2019-06-21 13:52:52:188][Thread-1] ERROR log.invalid - folder make fail
+[2019-06-21 13:52:52:188][Thread-3] ERROR log.invalid - folder make fail
+[2019-06-21 13:55:20:172][Thread-3] ERROR log.invalid - folder make fail
+[2019-06-21 13:55:30:172][Thread-2] ERROR log.invalid - folder make fail
+[2019-06-21 13:55:30:172][Thread-3] ERROR log.invalid - folder make fail
+[2019-06-21 13:55:30:172][Thread-1] ERROR log.invalid - folder make fail
+[2019-06-21 13:56:10:187][Thread-0] ERROR log.invalid - folder make fail
+[2019-06-21 13:56:10:187][Thread-3] ERROR log.invalid - folder make fail
+[2019-06-21 13:56:10:187][Thread-1] ERROR log.invalid - folder make fail
+[2019-06-21 13:57:06:172][Thread-0] ERROR log.invalid - folder make fail
+[2019-06-21 13:57:06:172][Thread-2] ERROR log.invalid - folder make fail
+[2019-06-21 13:57:06:172][Thread-1] ERROR log.invalid - folder make fail
+[2019-06-21 13:57:31:185][Thread-3] ERROR log.invalid - folder make fail
+[2019-06-21 13:57:31:185][Thread-2] ERROR log.invalid - folder make fail
+[2019-06-21 13:57:31:185][Thread-1] ERROR log.invalid - folder make fail
+[2019-06-21 13:58:03:187][Thread-0] ERROR log.invalid - folder make fail
+[2019-06-21 13:58:03:187][Thread-2] ERROR log.invalid - folder make fail
+[2019-06-21 13:58:03:187][Thread-1] ERROR log.invalid - folder make fail
+[2019-06-21 13:58:03:562][Thread-2] ERROR log.invalid - folder make fail
+[2019-06-21 14:05:42:531][Thread-3] ERROR log.invalid - FileManager make File NullException!
+[2019-06-21 14:06:15:531][Thread-0] ERROR log.invalid - FileManager make File NullException!
+[2019-06-21 14:18:22:187][Thread-2] ERROR log.invalid - folder make fail
+[2019-06-21 14:18:22:187][Thread-1] ERROR log.invalid - folder make fail
+[2019-06-21 14:18:22:187][Thread-0] ERROR log.invalid - folder make fail
+[2019-06-21 14:18:22:546][Thread-2] ERROR log.invalid - FileManager make File NullException!
+[2019-06-21 14:23:27:188][Thread-0] ERROR log.invalid - folder make fail
+[2019-06-21 14:23:27:188][Thread-1] ERROR log.invalid - folder make fail
+[2019-06-21 14:23:27:188][Thread-3] ERROR log.invalid - folder make fail
+[2019-06-21 14:24:20:172][Thread-2] ERROR log.invalid - folder make fail
+[2019-06-21 14:24:20:172][Thread-0] ERROR log.invalid - folder make fail
+[2019-06-21 14:24:20:172][Thread-1] ERROR log.invalid - folder make fail
+[2019-06-21 14:25:05:187][Thread-2] ERROR log.invalid - folder make fail
+[2019-06-21 14:25:05:187][Thread-1] ERROR log.invalid - folder make fail
+[2019-06-21 14:25:05:187][Thread-3] ERROR log.invalid - folder make fail
+[2019-06-21 14:25:54:169][Thread-0] ERROR log.invalid - folder make fail
+[2019-06-21 14:25:54:169][Thread-1] ERROR log.invalid - folder make fail
+[2019-06-21 14:25:54:169][Thread-3] ERROR log.invalid - folder make fail
+[2019-06-21 14:26:22:172][Thread-3] ERROR log.invalid - folder make fail
+[2019-06-21 14:26:22:172][Thread-1] ERROR log.invalid - folder make fail
+[2019-06-21 14:26:22:172][Thread-0] ERROR log.invalid - folder make fail
+[2019-06-21 14:28:43:187][Thread-0] ERROR log.invalid - folder make fail
+[2019-06-21 14:28:43:187][Thread-1] ERROR log.invalid - folder make fail
+[2019-06-21 14:28:43:187][Thread-3] ERROR log.invalid - folder make fail
+[2019-06-21 14:28:44:584][Thread-0] ERROR log.invalid - folder make fail
+[2019-06-21 14:30:13:197][Thread-2] ERROR log.invalid - folder make fail
+[2019-06-21 14:30:13:197][Thread-1] ERROR log.invalid - folder make fail
+[2019-06-21 14:30:13:197][Thread-0] ERROR log.invalid - folder make fail
+[2019-06-21 14:30:39:192][Thread-3] ERROR log.invalid - folder make fail
+[2019-06-21 14:30:39:192][Thread-2] ERROR log.invalid - folder make fail
+[2019-06-21 14:30:39:192][Thread-1] ERROR log.invalid - folder make fail
+[2019-06-21 14:31:12:178][Thread-1] ERROR log.invalid - folder make fail
+[2019-06-21 14:31:12:178][Thread-2] ERROR log.invalid - folder make fail
+[2019-06-21 14:31:12:178][Thread-0] ERROR log.invalid - folder make fail
+[2019-06-21 14:32:04:196][Thread-2] ERROR log.invalid - folder make fail
+[2019-06-21 14:32:04:196][Thread-3] ERROR log.invalid - folder make fail
+[2019-06-21 14:32:04:196][Thread-1] ERROR log.invalid - folder make fail

@@ -3,47 +3,54 @@ package kr.co.torpedo.exec;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import kr.co.torpedo.config.ConfigReader;
 import kr.co.torpedo.data.Path;
 import kr.co.torpedo.lotto.LottoNumberManager;
 import kr.co.torpedo.manager.FileRelatedManager;
-import kr.co.torpedo.manager.PropertyManager;
 
 public class ProgramExecutor {
 	public static final Logger invalidFileLogger = LoggerFactory.getLogger("log.invalid");
 	private LottoNumberManager manager;
-	private PropertyManager propertyManager;
+	private ConfigReader configReader;
 	private FileRelatedManager fileRelatedManager;
-	private int fileNum;
 
 	public ProgramExecutor() {
 		manager = new LottoNumberManager();
-		propertyManager = new PropertyManager();
+		configReader = new ConfigReader();
 		fileRelatedManager = new FileRelatedManager();
 		setPropertyPath();
-		setPropertyInfo();
-		fileNum = 0;
 	}
 
-	public void setFileNum(int fileNum) {
-		this.fileNum = fileNum;
+	public ConfigReader getConfigReader() {
+		return configReader;
 	}
 
-	public PropertyManager getPropertyManager() {
-		return propertyManager;
+	public void setConfigReader(ConfigReader configReader) {
+		this.configReader = configReader;
 	}
 
-	public void writeFile() {
+	public LottoNumberManager getManager() {
+		return manager;
+	}
+
+	public FileRelatedManager getFileRelatedManager() {
+		return fileRelatedManager;
+	}
+
+	public void setManager(LottoNumberManager manager) {
+		this.manager = manager;
+	}
+
+	public void setFileRelatedManager(FileRelatedManager fileRelatedManager) {
+		this.fileRelatedManager = fileRelatedManager;
+	}
+
+	public synchronized void writeFile(int fileNum) {
 		fileRelatedManager.getPathManager().makePathByDate();
 		int index = 1;
 
-		if (!checkDir(index)) {
-			return;
-		}
 		index = checkIndexBeforeStart(index);
 
-		if (fileNum == 0) {
-			fileNum = propertyManager.getData().getFileNum();
-		}
 		for (int i = 1; i <= fileNum; i++) {
 			if (!checkDir(index)) {
 				break;
@@ -55,9 +62,10 @@ public class ProgramExecutor {
 		}
 	}
 
-	public boolean checkDir(int index) {
-		fileRelatedManager.getFileManager().setDir(
-				propertyManager.getData().getDir() + fileRelatedManager.getPathManager().getPath() + index + "//");
+	public synchronized boolean checkDir(int index) {
+		String str = String.format("%04d", index);
+		fileRelatedManager.getFileManager()
+				.setDir(configReader.getDir() + fileRelatedManager.getPathManager().getPath() + str + "/");
 		fileRelatedManager.getFileManager().makeDirFile();
 		return fileRelatedManager.getFileManager().checkAndMakeDir();
 	}
@@ -68,7 +76,7 @@ public class ProgramExecutor {
 			return false;
 		}
 		fileRelatedManager.getFileIoManager().setFileManager(fileRelatedManager.getFileManager());
-		for (int j = 0; j < propertyManager.getData().getLottoset(); j++) {
+		for (int j = 0; j < configReader.getLottoSet(); j++) {
 			manager.makeLottoNumber();
 			fileRelatedManager.getFileIoManager().writeTextToFile(
 					fileRelatedManager.getFileIoManager().ConvertIntListToString(manager.getNumberList()));
@@ -78,7 +86,7 @@ public class ProgramExecutor {
 
 	public int checkIndexForLoop(int index) {
 		if (fileRelatedManager.getFileManager().getDirfile().listFiles() != null
-				&& fileRelatedManager.getFileManager().getDirfile().listFiles().length == propertyManager.getData()
+				&& fileRelatedManager.getFileManager().getDirfile().listFiles().length == configReader
 						.getFolderFileNum()) {
 			index++;
 		}
@@ -86,15 +94,20 @@ public class ProgramExecutor {
 	}
 
 	public int checkIndexBeforeStart(int index) {
+		if (!checkDir(index)) {
+			try {
+				throw new Exception("checkIndexBeforeStart checkDir fail");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
 		while (true) {
 			if (fileRelatedManager.getFileManager().getDirfile().listFiles() != null
-					&& fileRelatedManager.getFileManager().getDirfile().listFiles().length == propertyManager.getData()
+					&& fileRelatedManager.getFileManager().getDirfile().listFiles().length == configReader
 							.getFolderFileNum()) {
 				index++;
-				fileRelatedManager.getFileManager().setDir(propertyManager.getData().getDir()
-						+ fileRelatedManager.getPathManager().getPath() + index + "//");
-				fileRelatedManager.getFileManager().makeDirFile();
-				if (!fileRelatedManager.getFileManager().checkAndMakeDir()) {
+				if (!checkDir(index)) {
 					break;
 				}
 			} else {
@@ -105,15 +118,7 @@ public class ProgramExecutor {
 	}
 
 	private void setPropertyPath() {
-		propertyManager.getLoader().loadProp(Path.PROPERTY.getName());
-		propertyManager.getReader().setProperties(propertyManager.getLoader().getProperties());
-	}
-
-	private void setPropertyInfo() {
-		propertyManager.getData().setDir(propertyManager.getReader().getDir());
-		propertyManager.getData().setFileNum(propertyManager.getReader().getFileNum());
-		propertyManager.getData().setLottoset(propertyManager.getReader().getLottoSet());
-		propertyManager.getData().setFolderFileNum(propertyManager.getReader().getFolderFileNum());
-		propertyManager.getData().setThreadNum(propertyManager.getReader().getThreadNum());
+		configReader.loadProp(Path.PROPERTY.getName());
+		configReader.setProperties(configReader.getProperties());
 	}
 }
