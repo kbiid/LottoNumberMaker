@@ -56,15 +56,12 @@ class LottoTest {
 	@Test
 	void test_PropertyLoader() {
 		ConfigReader loader = new ConfigReader();
-		String path = "D:/eclipse_workspace/LottoMaker/src/main/resources/application.properties";
-		Assertions.assertEquals(true, loader.loadProp(path));
+		Assertions.assertNotNull(loader.getProperties());
 	}
 
 	@Test
 	void test_PropertyReader() {
 		ConfigReader loader = new ConfigReader();
-		String path = "D:/eclipse_workspace/LottoMaker/src/main/resources/application.properties";
-		loader.loadProp(path);
 		Assertions.assertEquals("D:\\test\\", loader.getDir());
 	}
 }

@@ -1,7 +1,7 @@
 package kr.co.torpedo.config;
 
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 import kr.co.torpedo.exec.ProgramExecutor;
@@ -11,24 +11,20 @@ public class ConfigReader {
 
 	public ConfigReader() {
 		properties = new Properties();
-	}
-
-	public void setProperties(Properties properties) {
-		this.properties = properties;
+		loadProp();
 	}
 
 	public Properties getProperties() {
 		return properties;
 	}
 
-	public boolean loadProp(String path) {
-		try (FileInputStream fis = new FileInputStream(path)) {
-			properties.load(fis);
+	private void loadProp() {
+		InputStream inputStream = getClass().getClassLoader().getResourceAsStream("application.properties");
+		try {
+			properties.load(inputStream);
 		} catch (IOException e) {
-			ProgramExecutor.invalidFileLogger.error("PropertyLoader IOException!!" + e);
-			return false;
+			e.printStackTrace();
 		}
-		return true;
 	}
 
 	public String getDir() {

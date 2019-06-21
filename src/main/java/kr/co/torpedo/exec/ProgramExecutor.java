@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import kr.co.torpedo.config.ConfigReader;
-import kr.co.torpedo.data.Path;
 import kr.co.torpedo.lotto.LottoNumberManager;
 import kr.co.torpedo.manager.FileRelatedManager;
 
@@ -18,7 +17,6 @@ public class ProgramExecutor {
 		manager = new LottoNumberManager();
 		configReader = new ConfigReader();
 		fileRelatedManager = new FileRelatedManager();
-		setPropertyPath();
 	}
 
 	public ConfigReader getConfigReader() {
@@ -115,10 +113,5 @@ public class ProgramExecutor {
 			}
 		}
 		return index;
-	}
-
-	private void setPropertyPath() {
-		configReader.loadProp(Path.PROPERTY.getName());
-		configReader.setProperties(configReader.getProperties());
 	}
 }
