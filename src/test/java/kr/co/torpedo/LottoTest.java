@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 
 import kr.co.torpedo.config.ConfigReader;
 import kr.co.torpedo.file.FileManager;
-import kr.co.torpedo.file.PathManager;
 import kr.co.torpedo.lotto.LottoNumberManager;
 
 class LottoTest {
@@ -34,9 +33,8 @@ class LottoTest {
 	@Test
 	void test_MakeDir() {
 		FileManager fileManager = new FileManager();
-		PathManager pathManager = new PathManager();
-		pathManager.makePathByDate();
-		fileManager.setDir("D:\\test\\" + pathManager.getPath());
+		fileManager.makePathByDate();
+		fileManager.setDir("D:\\test\\" + fileManager.getPath());
 		fileManager.makeDirFile();
 
 		Assertions.assertEquals(true, fileManager.checkAndMakeDir());
@@ -45,9 +43,8 @@ class LottoTest {
 	@Test
 	void test_MakeFile() {
 		FileManager fileManager = new FileManager();
-		PathManager pathManager = new PathManager();
-		pathManager.makePathByDate();
-		fileManager.setDir("D:\\test\\" + pathManager.getPath());
+		fileManager.makePathByDate();
+		fileManager.setDir("D:\\test\\" + fileManager.getPath());
 		fileManager.makeResultFile();
 
 		Assertions.assertEquals(true, fileManager.checkAndMakeFile());

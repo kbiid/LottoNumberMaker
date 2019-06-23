@@ -1,4 +1,4 @@
-package kr.co.torpedo.exec;
+package kr.co.torpedo.executor;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

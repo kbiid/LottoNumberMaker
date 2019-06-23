@@ -1,16 +1,26 @@
 package kr.co.torpedo.file;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.UUID;
 
-import kr.co.torpedo.exec.ProgramExecutor;
+import kr.co.torpedo.executor.ProgramExecutor;
 
 public class FileManager {
 	private File dirfile;
 	private File resultfile;
 	private String fileName;
 	private String dir;
+	private String path;
+
+	public String getPath() {
+		return path;
+	}
 
 	public void makeDirFile() {
 		dirfile = new File(getDir());
@@ -90,5 +100,45 @@ public class FileManager {
 
 	public String getUUID() {
 		return UUID.randomUUID().toString();
+	}
+
+	public void writeTextToFile(String text) {
+		if (!checkAndMakeFile()) {
+			ProgramExecutor.invalidFileLogger.error("file is null");
+			throw new NullPointerException("file is null");
+		}
+		try (FileWriter writer = new FileWriter(getResultfile(), true);
+				BufferedWriter bWriter = new BufferedWriter(writer);) {
+			bWriter.write(text);
+			bWriter.newLine();
+			bWriter.flush();
+		} catch (IOException e) {
+			ProgramExecutor.invalidFileLogger.error("FileIoManager IOException !!");
+			throw new NullPointerException("FileIoManager IOException !!" + e);
+		}
+	}
+
+	public String ConvertIntListToString(ArrayList<Integer> list) {
+		String str = "";
+		for (Integer integer : list) {
+			str += Integer.toString(integer) + " ";
+		}
+		return str;
+	}
+
+	public void makePathByDate() {
+		path = "";
+
+		SimpleDateFormat format = new SimpleDateFormat("yyyy");
+		String str = format.format(new Date());
+		path += str + "/";
+
+		format = new SimpleDateFormat("MM");
+		str = format.format(new Date());
+		path += str + "/";
+
+		format = new SimpleDateFormat("dd");
+		str = format.format(new Date());
+		path += str + "/";
 	}
 }

@@ -1,22 +1,22 @@
-package kr.co.torpedo.exec;
+package kr.co.torpedo.executor;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import kr.co.torpedo.config.ConfigReader;
+import kr.co.torpedo.file.FileManager;
 import kr.co.torpedo.lotto.LottoNumberManager;
-import kr.co.torpedo.manager.FileRelatedManager;
 
 public class ProgramExecutor {
 	public static final Logger invalidFileLogger = LoggerFactory.getLogger("log.invalid");
 	private LottoNumberManager manager;
 	private ConfigReader configReader;
-	private FileRelatedManager fileRelatedManager;
+	private FileManager fileManager;
 
 	public ProgramExecutor() {
 		manager = new LottoNumberManager();
 		configReader = new ConfigReader();
-		fileRelatedManager = new FileRelatedManager();
+		fileManager = new FileManager();
 	}
 
 	public ConfigReader getConfigReader() {
@@ -31,20 +31,20 @@ public class ProgramExecutor {
 		return manager;
 	}
 
-	public FileRelatedManager getFileRelatedManager() {
-		return fileRelatedManager;
+	public FileManager getFileManager() {
+		return fileManager;
 	}
 
 	public void setManager(LottoNumberManager manager) {
 		this.manager = manager;
 	}
 
-	public void setFileRelatedManager(FileRelatedManager fileRelatedManager) {
-		this.fileRelatedManager = fileRelatedManager;
+	public void setFileManager(FileManager fileManager) {
+		this.fileManager = fileManager;
 	}
 
 	public synchronized void writeFile(int fileNum) {
-		fileRelatedManager.getPathManager().makePathByDate();
+		fileManager.makePathByDate();
 		int index = 1;
 
 		index = checkIndexBeforeStart(index);
@@ -62,30 +62,26 @@ public class ProgramExecutor {
 
 	public synchronized boolean checkDir(int index) {
 		String str = String.format("%04d", index);
-		fileRelatedManager.getFileManager()
-				.setDir(configReader.getDir() + fileRelatedManager.getPathManager().getPath() + str + "/");
-		fileRelatedManager.getFileManager().makeDirFile();
-		return fileRelatedManager.getFileManager().checkAndMakeDir();
+		fileManager.setDir(configReader.getDir() + fileManager.getPath() + str + "/");
+		fileManager.makeDirFile();
+		return fileManager.checkAndMakeDir();
 	}
 
 	public boolean checkAndMakeResult() {
-		fileRelatedManager.getFileManager().makeResultFile();
-		if (!fileRelatedManager.getFileManager().checkAndMakeFile()) {
+		fileManager.makeResultFile();
+		if (!fileManager.checkAndMakeFile()) {
 			return false;
 		}
-		fileRelatedManager.getFileIoManager().setFileManager(fileRelatedManager.getFileManager());
 		for (int j = 0; j < configReader.getLottoSet(); j++) {
 			manager.makeLottoNumber();
-			fileRelatedManager.getFileIoManager().writeTextToFile(
-					fileRelatedManager.getFileIoManager().ConvertIntListToString(manager.getNumberList()));
+			fileManager.writeTextToFile(fileManager.ConvertIntListToString(manager.getNumberList()));
 		}
 		return true;
 	}
 
 	public int checkIndexForLoop(int index) {
-		if (fileRelatedManager.getFileManager().getDirfile().listFiles() != null
-				&& fileRelatedManager.getFileManager().getDirfile().listFiles().length == configReader
-						.getFolderFileNum()) {
+		if (fileManager.getDirfile().listFiles() != null
+				&& fileManager.getDirfile().listFiles().length == configReader.getFolderFileNum()) {
 			index++;
 		}
 		return index;
@@ -101,9 +97,8 @@ public class ProgramExecutor {
 		}
 
 		while (true) {
-			if (fileRelatedManager.getFileManager().getDirfile().listFiles() != null
-					&& fileRelatedManager.getFileManager().getDirfile().listFiles().length == configReader
-							.getFolderFileNum()) {
+			if (fileManager.getDirfile().listFiles() != null
+					&& fileManager.getDirfile().listFiles().length == configReader.getFolderFileNum()) {
 				index++;
 				if (!checkDir(index)) {
 					break;

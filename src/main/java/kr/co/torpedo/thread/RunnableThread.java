@@ -1,6 +1,6 @@
 package kr.co.torpedo.thread;
 
-import kr.co.torpedo.exec.ProgramExecutor;
+import kr.co.torpedo.executor.ProgramExecutor;
 
 public class RunnableThread implements Runnable{
 	private ProgramExecutor executor;

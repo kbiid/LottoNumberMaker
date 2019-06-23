@@ -1,6 +1,6 @@
 package kr.co.torpedo;
 
-import kr.co.torpedo.exec.ThreadExecutor;
+import kr.co.torpedo.executor.ThreadExecutor;
 
 public class Main {
 	public static void main(String[] args) {

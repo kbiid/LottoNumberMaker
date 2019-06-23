@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import kr.co.torpedo.exec.ProgramExecutor;
+import kr.co.torpedo.executor.ProgramExecutor;
 
 public class ConfigReader {
 	private Properties properties;
