@@ -1,10 +1,9 @@
-package kr.co.torpedo.lotto;
+package kr.co.torpedo.lottonumber;
 
 import java.util.ArrayList;
 
 public class LottoNumberManager {
 	private ArrayList<Integer> numberList;
-	private RandomNumberMaker numberMaker;
 
 	public LottoNumberManager() {
 		numberList = new ArrayList<>();
@@ -15,10 +14,9 @@ public class LottoNumberManager {
 	}
 
 	public void makeLottoNumber() {
-		numberMaker = new RandomNumberMaker(45);
 		numberList.clear();
 		while (numberList.size() < 6) {
-			int number = numberMaker.getRandomNumber();
+			int number = getRandomNumber(45);
 			if (!numberList.contains(number)) {
 				numberList.add(number);
 			}
@@ -40,5 +38,10 @@ public class LottoNumberManager {
 		for (Integer integer : numberList) {
 			System.out.println(integer);
 		}
+	}
+
+	private int getRandomNumber(int num) {
+		int number = (int) (Math.random() * num) + 1;
+		return number;
 	}
 }

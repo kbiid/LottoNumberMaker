@@ -1,12 +1,12 @@
-package kr.co.torpedo.thread;
+package kr.co.torpedo.threadrunner;
 
-import kr.co.torpedo.executor.ProgramExecutor;
+import kr.co.torpedo.writer.ContentWriter;
 
 public class RunnableThread implements Runnable{
-	private ProgramExecutor executor;
+	private ContentWriter executor;
 	private int fileNum;
 	
-	public void setExecutor(ProgramExecutor executor) {
+	public void setExecutor(ContentWriter executor) {
 		this.executor = executor;
 	}
 	

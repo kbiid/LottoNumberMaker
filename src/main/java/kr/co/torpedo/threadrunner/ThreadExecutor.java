@@ -1,17 +1,17 @@
-package kr.co.torpedo.executor;
+package kr.co.torpedo.threadrunner;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import kr.co.torpedo.thread.RunnableThread;
+import kr.co.torpedo.writer.ContentWriter;
 
 public class ThreadExecutor {
-	private ProgramExecutor executor;
+	private ContentWriter executor;
 	private RunnableThread rt;
 	private ExecutorService exService;
 
 	public ThreadExecutor() {
-		executor = new ProgramExecutor();
+		executor = new ContentWriter();
 	}
 
 	public void startThread() {

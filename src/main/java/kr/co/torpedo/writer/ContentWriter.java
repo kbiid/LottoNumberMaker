@@ -1,46 +1,25 @@
-package kr.co.torpedo.executor;
+package kr.co.torpedo.writer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import kr.co.torpedo.config.ConfigReader;
-import kr.co.torpedo.file.FileManager;
-import kr.co.torpedo.lotto.LottoNumberManager;
+import kr.co.torpedo.lottonumber.LottoNumberManager;
 
-public class ProgramExecutor {
+public class ContentWriter {
 	public static final Logger invalidFileLogger = LoggerFactory.getLogger("log.invalid");
 	private LottoNumberManager manager;
 	private ConfigReader configReader;
-	private FileManager fileManager;
+	private FileTextWriter fileManager;
 
-	public ProgramExecutor() {
+	public ContentWriter() {
 		manager = new LottoNumberManager();
 		configReader = new ConfigReader();
-		fileManager = new FileManager();
+		fileManager = new FileTextWriter();
 	}
 
 	public ConfigReader getConfigReader() {
 		return configReader;
-	}
-
-	public void setConfigReader(ConfigReader configReader) {
-		this.configReader = configReader;
-	}
-
-	public LottoNumberManager getManager() {
-		return manager;
-	}
-
-	public FileManager getFileManager() {
-		return fileManager;
-	}
-
-	public void setManager(LottoNumberManager manager) {
-		this.manager = manager;
-	}
-
-	public void setFileManager(FileManager fileManager) {
-		this.fileManager = fileManager;
 	}
 
 	public synchronized void writeFile(int fileNum) {
@@ -60,14 +39,14 @@ public class ProgramExecutor {
 		}
 	}
 
-	public synchronized boolean checkDir(int index) {
+	private synchronized boolean checkDir(int index) {
 		String str = String.format("%04d", index);
 		fileManager.setDir(configReader.getDir() + fileManager.getPath() + str + "/");
 		fileManager.makeDirFile();
 		return fileManager.checkAndMakeDir();
 	}
 
-	public boolean checkAndMakeResult() {
+	private boolean checkAndMakeResult() {
 		fileManager.makeResultFile();
 		if (!fileManager.checkAndMakeFile()) {
 			return false;
@@ -79,7 +58,7 @@ public class ProgramExecutor {
 		return true;
 	}
 
-	public int checkIndexForLoop(int index) {
+	private int checkIndexForLoop(int index) {
 		if (fileManager.getDirfile().listFiles() != null
 				&& fileManager.getDirfile().listFiles().length == configReader.getFolderFileNum()) {
 			index++;
@@ -87,7 +66,7 @@ public class ProgramExecutor {
 		return index;
 	}
 
-	public int checkIndexBeforeStart(int index) {
+	private int checkIndexBeforeStart(int index) {
 		if (!checkDir(index)) {
 			try {
 				throw new Exception("checkIndexBeforeStart checkDir fail");

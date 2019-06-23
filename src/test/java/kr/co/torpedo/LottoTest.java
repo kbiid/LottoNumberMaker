@@ -4,8 +4,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import kr.co.torpedo.config.ConfigReader;
-import kr.co.torpedo.file.FileManager;
-import kr.co.torpedo.lotto.LottoNumberManager;
+import kr.co.torpedo.lottonumber.LottoNumberManager;
+import kr.co.torpedo.writer.FileTextWriter;
 
 class LottoTest {
 
@@ -26,13 +26,13 @@ class LottoTest {
 
 	@Test
 	void test_FileMaker() {
-		FileManager fileManager = new FileManager();
+		FileTextWriter fileManager = new FileTextWriter();
 		Assertions.assertNotNull(fileManager);
 	}
 
 	@Test
 	void test_MakeDir() {
-		FileManager fileManager = new FileManager();
+		FileTextWriter fileManager = new FileTextWriter();
 		fileManager.makePathByDate();
 		fileManager.setDir("D:\\test\\" + fileManager.getPath());
 		fileManager.makeDirFile();
@@ -42,7 +42,7 @@ class LottoTest {
 
 	@Test
 	void test_MakeFile() {
-		FileManager fileManager = new FileManager();
+		FileTextWriter fileManager = new FileTextWriter();
 		fileManager.makePathByDate();
 		fileManager.setDir("D:\\test\\" + fileManager.getPath());
 		fileManager.makeResultFile();

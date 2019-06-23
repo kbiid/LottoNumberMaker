@@ -1,4 +1,4 @@
-package kr.co.torpedo.file;
+package kr.co.torpedo.writer;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -9,12 +9,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
 
-import kr.co.torpedo.executor.ProgramExecutor;
-
-public class FileManager {
+public class FileTextWriter {
 	private File dirfile;
 	private File resultfile;
-	private String fileName;
 	private String dir;
 	private String path;
 
@@ -30,32 +27,12 @@ public class FileManager {
 		resultfile = new File(getDir() + getUUID() + ".txt");
 	}
 
-	public void setResultFile(String str) {
-		resultfile = new File(getDir() + str);
-	}
-
 	public File getDirfile() {
 		return dirfile;
 	}
 
-	public void setDirfile(File dirfile) {
-		this.dirfile = dirfile;
-	}
-
 	public File getResultfile() {
 		return resultfile;
-	}
-
-	public void setResultfile(File makefile) {
-		this.resultfile = makefile;
-	}
-
-	public String getFileName() {
-		return fileName;
-	}
-
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
 	}
 
 	public String getDir() {
@@ -68,12 +45,12 @@ public class FileManager {
 
 	public boolean checkAndMakeDir() {
 		if (dirfile == null) { // dirfile 변수가 null 일때
-			ProgramExecutor.invalidFileLogger.error("dirfile is NullException!");
+			ContentWriter.invalidFileLogger.error("dirfile is NullException!");
 			return false;
 		}
 		if (!(dirfile.exists())) { // 폴더가 없는 경우
 			if (!dirfile.mkdirs()) {
-				ProgramExecutor.invalidFileLogger.error("folder make fail");
+				ContentWriter.invalidFileLogger.error("folder make fail");
 				return false;
 			}
 		}
@@ -82,29 +59,29 @@ public class FileManager {
 
 	public boolean checkAndMakeFile() {
 		if (resultfile == null) { // makefile 변수가 null 일때
-			ProgramExecutor.invalidFileLogger.error("makeFile is NullException!");
+			ContentWriter.invalidFileLogger.error("makeFile is NullException!");
 			return false;
 		}
 		if (!resultfile.exists()) { // 파일이 없는 경우
 			try {
 				if (!resultfile.createNewFile()) {
-					ProgramExecutor.invalidFileLogger.error("FileManager make File NullException!");
+					ContentWriter.invalidFileLogger.error("FileManager make File NullException!");
 					return false;
 				}
 			} catch (IOException e) {
-				ProgramExecutor.invalidFileLogger.error("Serializer Exception : " + e);
+				ContentWriter.invalidFileLogger.error("Serializer Exception : " + e);
 			}
 		}
 		return true;
 	}
 
-	public String getUUID() {
+	private String getUUID() {
 		return UUID.randomUUID().toString();
 	}
 
 	public void writeTextToFile(String text) {
 		if (!checkAndMakeFile()) {
-			ProgramExecutor.invalidFileLogger.error("file is null");
+			ContentWriter.invalidFileLogger.error("file is null");
 			throw new NullPointerException("file is null");
 		}
 		try (FileWriter writer = new FileWriter(getResultfile(), true);
@@ -113,7 +90,7 @@ public class FileManager {
 			bWriter.newLine();
 			bWriter.flush();
 		} catch (IOException e) {
-			ProgramExecutor.invalidFileLogger.error("FileIoManager IOException !!");
+			ContentWriter.invalidFileLogger.error("FileIoManager IOException !!");
 			throw new NullPointerException("FileIoManager IOException !!" + e);
 		}
 	}
