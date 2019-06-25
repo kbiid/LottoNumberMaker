@@ -20,23 +20,15 @@ public class FileTextWriter {
 	}
 
 	public void makeDirFile() {
-		dirfile = new File(getDir());
+		dirfile = new File(dir);
 	}
 
 	public void makeResultFile() {
-		resultfile = new File(getDir() + getUUID() + ".txt");
+		resultfile = new File(dir + getUUID() + ".txt");
 	}
 
 	public File getDirfile() {
 		return dirfile;
-	}
-
-	public File getResultfile() {
-		return resultfile;
-	}
-
-	public String getDir() {
-		return dir;
 	}
 
 	public void setDir(String dir) {
@@ -84,7 +76,7 @@ public class FileTextWriter {
 			ContentWriter.invalidFileLogger.error("file is null");
 			throw new NullPointerException("file is null");
 		}
-		try (FileWriter writer = new FileWriter(getResultfile(), true);
+		try (FileWriter writer = new FileWriter(resultfile, true);
 				BufferedWriter bWriter = new BufferedWriter(writer);) {
 			bWriter.write(text);
 			bWriter.newLine();
