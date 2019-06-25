@@ -23,6 +23,7 @@ public class ContentWriter {
 	}
 
 	public synchronized void writeFile(int fileNum) {
+		System.out.println(System.currentTimeMillis());
 		fileManager.makePathByDate();
 		int index = 1;
 
@@ -39,7 +40,7 @@ public class ContentWriter {
 		}
 	}
 
-	private synchronized boolean checkDir(int index) {
+	private boolean checkDir(int index) {
 		String str = String.format("%04d", index);
 		fileManager.setDir(configReader.getDir() + fileManager.getPath() + str + "/");
 		fileManager.makeDirFile();
