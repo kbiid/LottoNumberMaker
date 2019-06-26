@@ -22,16 +22,22 @@ public class ThreadExecutor {
 		int fileNum;
 
 		for (int i = 1; i <= threadNum; i++) {
-			if (i == threadNum) {
-				fileNum = ((propertyFileNum / threadNum) + (propertyFileNum % threadNum));
-			} else {
-				fileNum = ((propertyFileNum / threadNum));
-			}
+			fileNum = getFileNum(threadNum, propertyFileNum, i);
 			rt = new RunnableThread();
 			rt.setExecutor(executor);
 			rt.setFileNum(fileNum);
 			exService.execute(rt);
 		}
 		exService.shutdown();
+	}
+
+	private int getFileNum(int threadNum, int propertyFileNum, int i) {
+		int fileNum;
+		if (i == threadNum) {
+			fileNum = ((propertyFileNum / threadNum) + (propertyFileNum % threadNum));
+		} else {
+			fileNum = ((propertyFileNum / threadNum));
+		}
+		return fileNum;
 	}
 }
