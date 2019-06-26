@@ -23,7 +23,6 @@ public class ContentWriter {
 	}
 
 	public synchronized void writeFile(int fileNum) {
-		System.out.println(System.currentTimeMillis());
 		fileManager.makePathByDate();
 		int index = 1;
 

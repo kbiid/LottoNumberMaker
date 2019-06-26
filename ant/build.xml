@@ -34,7 +34,7 @@
 		<mkdir dir="${lotto}/conf" />
 		<mkdir dir="${lotto}/log" />
 		<mkdir dir="${lotto}/lib" />
-		<mkdir dir="${lotto}/build" />
+		<mkdir dir="${build}" />
 
 		<copydir src="../src/main/resources-ubuntu" dest="${lotto}/conf">
 		</copydir>
@@ -44,16 +44,13 @@
 
 	<echo message="compile" />
 	<target name="compile" depends="init" description="complie the source">
-		<javac srcdir="${src}" destdir="${lotto}/build" classpathref="classpath" />
+		<javac srcdir="${src}" destdir="${build}" classpathref="classpath" />
 	</target>
 
 	<target name="dist" depends="compile" description="generate the description">
-		<jar destfile="${lotto}/lib/lotto.jar" basedir="${lotto}/build">
+		<jar destfile="${lotto}/lib/lotto.jar" basedir="${build}">
 			<manifest>
 				<attribute name="Main-Class" value="kr.co.torpedo.Main" />
-			</manifest>
-			<manifest>
-				<attribute name="Class-Path" value="slf4j-api-1.7.26.jar slf4j-log4j12-1.7.26.jar slf4j-simple-1.7.26.jar log4j-1.2.17.jar logback-classic-1.2.3.jar" />
 			</manifest>
 		</jar>
 	</target>
