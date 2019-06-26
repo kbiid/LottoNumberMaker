@@ -17,9 +17,9 @@ public class ThreadExecutor {
 	public void startThread() {
 		int threadNum = executor.getConfigReader().getThreadNum();
 		int propertyFileNum = executor.getConfigReader().getFileNum();
+		int fileNum;
 		exService = Executors.newFixedThreadPool(threadNum);
 		rt = new RunnableThread();
-		int fileNum;
 
 		for (int i = 1; i <= threadNum; i++) {
 			fileNum = getFileNum(threadNum, propertyFileNum, i);

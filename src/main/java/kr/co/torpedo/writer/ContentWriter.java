@@ -8,12 +8,12 @@ import kr.co.torpedo.lottonumber.LottoNumberManager;
 
 public class ContentWriter {
 	public static final Logger invalidFileLogger = LoggerFactory.getLogger("log.invalid");
-	private LottoNumberManager manager;
+	private LottoNumberManager lottoNumberManager;
 	private ConfigReader configReader;
 	private FileTextWriter fileManager;
 
 	public ContentWriter() {
-		manager = new LottoNumberManager();
+		lottoNumberManager = new LottoNumberManager();
 		configReader = new ConfigReader();
 		fileManager = new FileTextWriter();
 	}
@@ -30,7 +30,7 @@ public class ContentWriter {
 		index = checkIndexBeforeStart(index);
 
 		for (int i = 1; i <= fileNum; i++) {
-			if (!checkDir(index)) {
+			if (!checkFileDir(index)) {
 				break;
 			}
 			if (!checkAndMakeResult()) {
@@ -40,9 +40,9 @@ public class ContentWriter {
 		}
 	}
 
-	private boolean checkDir(int index) {
+	private boolean checkFileDir(int index) {
 		String str = String.format("%04d", index);
-		fileManager.setDir(configReader.getDir() + fileManager.getPath() + str + "/");
+		fileManager.setFileDir(configReader.getDir() + fileManager.getPathByDate() + str + "/");
 		fileManager.makeDirFile();
 		return fileManager.checkAndMakeDir();
 	}
@@ -53,8 +53,8 @@ public class ContentWriter {
 			return false;
 		}
 		for (int j = 0; j < configReader.getLottoSet(); j++) {
-			manager.makeLottoNumber();
-			fileManager.writeTextToFile(fileManager.ConvertIntListToString(manager.getNumberList()));
+			lottoNumberManager.makeLottoNumber();
+			fileManager.writeTextToFile(fileManager.ConvertIntListToString(lottoNumberManager.getNumberList()));
 		}
 		return true;
 	}
@@ -68,7 +68,7 @@ public class ContentWriter {
 	}
 
 	private int checkIndexBeforeStart(int index) {
-		if (!checkDir(index)) {
+		if (!checkFileDir(index)) {
 			try {
 				throw new Exception("checkIndexBeforeStart checkDir fail");
 			} catch (Exception e) {
@@ -80,7 +80,7 @@ public class ContentWriter {
 			if (fileManager.getDirfile().listFiles() != null
 					&& fileManager.getDirfile().listFiles().length == configReader.getFolderFileNum()) {
 				index++;
-				if (!checkDir(index)) {
+				if (!checkFileDir(index)) {
 					break;
 				}
 			} else {

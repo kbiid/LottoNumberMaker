@@ -12,27 +12,27 @@ import java.util.UUID;
 public class FileTextWriter {
 	private File dirfile;
 	private File resultfile;
-	private String dir;
-	private String path;
+	private String fileDir;
+	private String pathByDate;
 
-	public String getPath() {
-		return path;
+	public String getPathByDate() {
+		return pathByDate;
 	}
 
 	public void makeDirFile() {
-		dirfile = new File(dir);
+		dirfile = new File(fileDir);
 	}
 
 	public void makeResultFile() {
-		resultfile = new File(dir + getUUID() + ".txt");
+		resultfile = new File(fileDir + getUUID() + ".txt");
 	}
 
 	public File getDirfile() {
 		return dirfile;
 	}
 
-	public void setDir(String dir) {
-		this.dir = dir;
+	public void setFileDir(String dir) {
+		this.fileDir = dir;
 	}
 
 	public boolean checkAndMakeDir() {
@@ -96,18 +96,18 @@ public class FileTextWriter {
 	}
 
 	public void makePathByDate() {
-		path = "";
+		pathByDate = "";
 
 		SimpleDateFormat format = new SimpleDateFormat("yyyy");
 		String str = format.format(new Date());
-		path += str + "/";
+		pathByDate += str + "/";
 
 		format = new SimpleDateFormat("MM");
 		str = format.format(new Date());
-		path += str + "/";
+		pathByDate += str + "/";
 
 		format = new SimpleDateFormat("dd");
 		str = format.format(new Date());
-		path += str + "/";
+		pathByDate += str + "/";
 	}
 }
