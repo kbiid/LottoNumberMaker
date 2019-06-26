@@ -41,16 +41,16 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
-	<classpathentry kind="lib" path="target/dependency/apiguardian-api-1.0.0.jar"/>
-	<classpathentry kind="lib" path="target/dependency/junit-3.8.1.jar"/>
-	<classpathentry kind="lib" path="target/dependency/junit-jupiter-api-5.4.0.jar"/>
-	<classpathentry kind="lib" path="target/dependency/junit-platform-commons-1.4.0.jar"/>
-	<classpathentry kind="lib" path="target/dependency/log4j-1.2.17.jar"/>
-	<classpathentry kind="lib" path="target/dependency/logback-classic-1.2.3.jar"/>
-	<classpathentry kind="lib" path="target/dependency/logback-core-1.2.3.jar"/>
-	<classpathentry kind="lib" path="target/dependency/opentest4j-1.1.1.jar"/>
-	<classpathentry kind="lib" path="target/dependency/slf4j-api-1.7.26.jar"/>
-	<classpathentry kind="lib" path="target/dependency/slf4j-log4j12-1.7.26.jar"/>
-	<classpathentry kind="lib" path="target/dependency/slf4j-simple-1.7.26.jar"/>
+	<classpathentry kind="lib" path="dependency/apiguardian-api-1.0.0.jar"/>
+	<classpathentry kind="lib" path="dependency/junit-3.8.1.jar"/>
+	<classpathentry kind="lib" path="dependency/junit-jupiter-api-5.4.0.jar"/>
+	<classpathentry kind="lib" path="dependency/junit-platform-commons-1.4.0.jar"/>
+	<classpathentry kind="lib" path="dependency/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="dependency/logback-classic-1.2.3.jar"/>
+	<classpathentry kind="lib" path="dependency/logback-core-1.2.3.jar"/>
+	<classpathentry kind="lib" path="dependency/opentest4j-1.1.1.jar"/>
+	<classpathentry kind="lib" path="dependency/slf4j-api-1.7.26.jar"/>
+	<classpathentry kind="lib" path="dependency/slf4j-log4j12-1.7.26.jar"/>
+	<classpathentry kind="lib" path="dependency/slf4j-simple-1.7.26.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

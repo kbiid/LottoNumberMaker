@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<project default="main" basedir="." name="lotto">
+<project default="main" basedir="." name="dist">
 	<echo message="pulling in property files" />
 	<property file="build.properties" />
 	<property file="application.properties" />
@@ -14,45 +14,50 @@
 	<property name="conf" location="conf" />
 	<property name="lib" location="lib" />
 	<property name="log" location="log" />
-	<property name="lotto" location="lotto" />
 	<property name="build" location="build" />
 	<property name="mainclass" value="../src/main/java/Main">
 	</property>
 
 	<path id="classpath">
-		<fileset dir="/${lotto}/lib">
+		<fileset dir="/${lib}">
 			<include name="*.jar" />
 		</fileset>
-		<fileset dir="/${lotto}/conf">
+		<fileset dir="/${conf}">
 			<include name="*.properties" />
 		</fileset>
 	</path>
 
 	<target name="init">
-		<mkdir dir="${lotto}" />
-		<mkdir dir="${lotto}/bin" />
-		<mkdir dir="${lotto}/conf" />
-		<mkdir dir="${lotto}/log" />
-		<mkdir dir="${lotto}/lib" />
-		<mkdir dir="${build}" />
+		<mkdir dir="../build" />
+		<mkdir dir="../build/classes" />
+		<mkdir dir="../build/deploy" />
+		<mkdir dir="/${bin}" />
+		<mkdir dir="/${conf}" />
+		<mkdir dir="/${log}" />
+		<mkdir dir="/${lib}" />
 
-		<copydir src="../src/main/resources-ubuntu" dest="${lotto}/conf">
+		<copydir src="../src/main/resources-ubuntu" dest="/${conf}">
 		</copydir>
-		<copydir src="../target/dependency" dest="${lotto}/lib">
+		<copydir src="../dependency" dest="/${lib}">
 		</copydir>
 	</target>
 
 	<echo message="compile" />
 	<target name="compile" depends="init" description="complie the source">
-		<javac srcdir="${src}" destdir="${build}" classpathref="classpath" />
+		<javac srcdir="${src}" destdir="../build/classes" classpathref="classpath" />
 	</target>
 
 	<target name="dist" depends="compile" description="generate the description">
-		<jar destfile="${lotto}/lib/lotto.jar" basedir="${build}">
+		<jar destfile="/${lib}/lotto-1.0.0.jar" basedir="../build/classes">
 			<manifest>
 				<attribute name="Main-Class" value="kr.co.torpedo.Main" />
 			</manifest>
 		</jar>
+		<copy todir="../build/deploy">
+			<fileset dir="/${lib}">
+				<include name="lotto-1.0.0.jar" />
+			</fileset>
+		</copy>
 	</target>
 
 	<target name="main">
