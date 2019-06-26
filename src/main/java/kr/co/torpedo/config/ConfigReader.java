@@ -19,7 +19,7 @@ public class ConfigReader {
 	}
 
 	private void loadProp() {
-		try(InputStream inputStream = getClass().getClassLoader().getResourceAsStream("application.properties")) {
+		try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("application.properties")) {
 			properties.load(inputStream);
 		} catch (IOException e) {
 			e.printStackTrace();

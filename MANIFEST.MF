@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.10.5
+Created-By: 1.8.0_212-b04 (Azul Systems, Inc.)
+Main-Class: kr.co.torpedo.Main
+Class-Path: /home/kbiid/lotto/lib
+
