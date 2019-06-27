@@ -10,38 +10,38 @@ import java.util.Date;
 import java.util.UUID;
 
 public class FileTextWriter {
-	private File dirfile;
+	private File fileDir;
 	private File resultfile;
-	private String fileDir;
+	private String filePath;
 	private String pathByDate;
 
 	public String getPathByDate() {
 		return pathByDate;
 	}
 
-	public void makeDirFile() {
-		dirfile = new File(fileDir);
+	public void makeFileDir() {
+		fileDir = new File(filePath);
 	}
 
 	public void makeResultFile() {
-		resultfile = new File(fileDir + getUUID() + ".txt");
+		resultfile = new File(filePath + getUUID() + ".txt");
 	}
 
-	public File getDirfile() {
-		return dirfile;
+	public File getFileDir() {
+		return fileDir;
 	}
 
-	public void setFileDir(String dir) {
-		this.fileDir = dir;
+	public void setFilePath(String dir) {
+		this.filePath = dir;
 	}
 
 	public boolean checkAndMakeDir() {
-		if (dirfile == null) { // dirfile 변수가 null 일때
+		if (fileDir == null) { // dirfile 변수가 null 일때
 			ContentWriter.invalidFileLogger.error("dirfile is NullException!");
 			return false;
 		}
-		if (!(dirfile.exists())) { // 폴더가 없는 경우
-			if (!dirfile.mkdirs()) {
+		if (!(fileDir.exists())) { // 폴더가 없는 경우
+			if (!fileDir.mkdirs()) {
 				ContentWriter.invalidFileLogger.error("folder make fail");
 				return false;
 			}

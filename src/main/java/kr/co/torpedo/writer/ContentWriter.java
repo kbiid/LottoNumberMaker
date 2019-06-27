@@ -41,8 +41,8 @@ public class ContentWriter {
 
 	private boolean checkFileDir(int index) {
 		String str = String.format("%04d", index);
-		fileManager.setFileDir(configReader.getDir() + fileManager.getPathByDate() + str + "/");
-		fileManager.makeDirFile();
+		fileManager.setFilePath(configReader.getDir() + fileManager.getPathByDate() + str + "/");
+		fileManager.makeFileDir();
 		return fileManager.checkAndMakeDir();
 	}
 
@@ -59,8 +59,8 @@ public class ContentWriter {
 	}
 
 	private int checkIndexForLoop(int index) {
-		if (fileManager.getDirfile().listFiles() != null
-				&& fileManager.getDirfile().listFiles().length == configReader.getFolderFileNum()) {
+		if (fileManager.getFileDir().listFiles() != null
+				&& fileManager.getFileDir().listFiles().length == configReader.getFolderFileNum()) {
 			index++;
 		}
 		return index;
@@ -76,8 +76,8 @@ public class ContentWriter {
 		}
 
 		while (true) {
-			if (fileManager.getDirfile().listFiles() != null
-					&& fileManager.getDirfile().listFiles().length == configReader.getFolderFileNum()) {
+			if (fileManager.getFileDir().listFiles() != null
+					&& fileManager.getFileDir().listFiles().length == configReader.getFolderFileNum()) {
 				index++;
 				if (!checkFileDir(index)) {
 					break;
