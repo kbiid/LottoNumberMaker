@@ -34,11 +34,8 @@
 		<mkdir dir="/${bin}" />
 		<mkdir dir="/${conf}" />
 		<mkdir dir="/${log}" />
-		<mkdir dir="/${lib}" />
 
 		<copydir src="../src/main/resources-ubuntu" dest="/${conf}">
-		</copydir>
-		<copydir src="../dependency" dest="/${lib}">
 		</copydir>
 	</target>
 
