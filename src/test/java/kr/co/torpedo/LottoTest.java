@@ -34,8 +34,8 @@ class LottoTest {
 	void test_MakeDir() {
 		FileTextWriter fileManager = new FileTextWriter();
 		fileManager.makePathByDate();
-		fileManager.setFileDir("D:\\test\\" + fileManager.getPathByDate());
-		fileManager.makeDirFile();
+		fileManager.setFilePath("D:\\test\\" + fileManager.getPathByDate());
+		fileManager.makeFileDir();
 
 		Assertions.assertEquals(true, fileManager.checkAndMakeDir());
 	}
@@ -44,7 +44,7 @@ class LottoTest {
 	void test_MakeFile() {
 		FileTextWriter fileManager = new FileTextWriter();
 		fileManager.makePathByDate();
-		fileManager.setFileDir("D:\\test\\" + fileManager.getPathByDate());
+		fileManager.setFilePath("D:\\test\\" + fileManager.getPathByDate());
 		fileManager.makeResultFile();
 
 		Assertions.assertEquals(true, fileManager.checkAndMakeFile());
