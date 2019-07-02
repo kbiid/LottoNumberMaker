@@ -1,7 +1,6 @@
 package kr.co.torpedo.config;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -22,10 +21,8 @@ public class ConfigReader {
 	private void loadProp() {
 		try (FileInputStream inputStream = new FileInputStream(System.getProperty("config.properties"))) {
 			properties.load(inputStream);
-		} catch (FileNotFoundException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
 		}
 	}
 
