@@ -14,7 +14,7 @@ public class ThreadExecutor {
 		executor = new ContentWriter();
 	}
 
-	public void startThread() {
+	public void start() {
 		int threadNum = executor.getConfigReader().getThreadNum();
 		int propertyFileNum = executor.getConfigReader().getFileNum();
 		int fileNum;

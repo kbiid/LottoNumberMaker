@@ -8,7 +8,7 @@ public class Main {
 		long start, end;
 		start = System.currentTimeMillis();
 		ThreadExecutor tExecutor = new ThreadExecutor();
-		tExecutor.startThread();
+		tExecutor.start();
 		end = System.currentTimeMillis();
 		System.out.println(" 소요 시간 : " + (end - start) / 1000.0);
 	}
